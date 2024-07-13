@@ -74,11 +74,15 @@ def checkout(skus):
     for combo, (combo_count, combo_price) in combos:
         total_bought = sum(counts[sku] for sku in combo if sku in counts)
         while total_bought >= combo_count:
+            print("Found combo!")
             total_price += combo_price
             for sku in combo:
                 if sku in counts:
                     counts[sku] -= 1
                     total_bought -= 1
+
+    print(total_price)
+    print(counts)
     
 
     # First apply the multi-buy offers and update the counts
@@ -108,4 +112,5 @@ def checkout(skus):
         
     return total_price
     
+
 
