@@ -38,7 +38,7 @@ def checkout(skus):
 
     for basket_sku, basket_count in counts.items():
         if basket_sku in multi_offers:
-            offer_count, details = multi_offers[sku]
+            offer_count, details = multi_offers[basket_sku]
             free_sku, free_count = details
             while basket_count >= offer_count:
                 basket_count -= offer_count
@@ -57,6 +57,7 @@ def checkout(skus):
         
     return total_price
     
+
 
 
 
