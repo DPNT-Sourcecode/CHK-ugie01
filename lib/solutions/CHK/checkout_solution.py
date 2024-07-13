@@ -15,7 +15,7 @@ prices = {
     'H': 10,
     'I': 35,
     'J': 60,
-    'K': 80,
+    'K': 70,
     'L': 90,
     'M': 15,
     'N': 40,
@@ -28,16 +28,16 @@ prices = {
     'U': 40,
     'V': 50,
     'W': 20,
-    'X': 90,
-    'Y': 10,
-    'Z': 50,
+    'X': 17,
+    'Y': 20,
+    'Z': 21,
 }
 
 normal_offers = {
     'A': [ (3, 130), (5, 200) ],
     'B': [ (2, 45) ],
     'H': [ (5, 45), (10, 80) ],
-    'K': [ (2, 150) ],
+    'K': [ (2, 120) ],
     'P': [ (5, 200) ],
     'Q': [ (3, 80) ],
     'V': [ (2, 90), (3, 130) ],
@@ -52,6 +52,11 @@ multi_offers = {
     'U': (4, ('U', 1)),
 }
 
+# Structure: SKUs in the combo, (number of items, price)
+combos = [
+    (['S', 'T', 'X', 'Y', 'Z'], (3, 45)),
+]
+
 def checkout(skus):
 
     total_price = 0
@@ -65,6 +70,16 @@ def checkout(skus):
 
     # Count the number of each item in the basket
     counts = {sku: skus.count(sku) for sku in set(skus)}
+
+    for combo, (combo_count, combo_price) in combos:
+        total_bought = sum(counts[sku] for sku in combo if sku in counts)
+        while total_bought >= combo_count:
+            total_price += combo_price
+            for sku in combo:
+                if sku in counts:
+                    counts[sku] -= 1
+                    total_bought -= 1
+    
 
     # First apply the multi-buy offers and update the counts
     for basket_sku in multi_offers:
@@ -93,4 +108,5 @@ def checkout(skus):
         
     return total_price
     
+
 
