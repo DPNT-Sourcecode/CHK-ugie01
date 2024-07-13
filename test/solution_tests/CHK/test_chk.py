@@ -18,4 +18,3 @@ class TestSum():
         assert checkout.checkout('EEBB') == 110
         
 
-
