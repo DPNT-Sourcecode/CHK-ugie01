@@ -19,6 +19,23 @@ class TestSum():
         assert checkout.checkout('FF') == 20
         assert checkout.checkout('FFF') == 20
         assert checkout.checkout('FFFF') == 30
+        assert checkout.checkout('HHHHH') == 45
+        assert checkout.checkout('HHHHHHHHHH') == 80
+        assert checkout.checkout('HHHHHHHHH') == 85
+        assert checkout.checkout('NNNM') == 120
+        assert checkout.checkout('NNM') == 95
+        assert checkout.checkout('PPPPP') == 200
+        assert checkout.checkout('PPPPPP') == 250
+        assert checkout.checkout('QQQ') == 80
+        assert checkout.checkout('RRRQ') == 150
+        assert checkout.checkout('RRRQQ') == 180
+        assert checkout.checkout('UUUU') == 120
+        assert checkout.checkout('UUU') == 120
+        assert checkout.checkout('VV') == 90
+        assert checkout.checkout('VVV') == 130
+        assert checkout.checkout('VVVV') == 180
+        assert checkout.checkout('VVVVV') == 220
         
+
 
 
