@@ -11,10 +11,14 @@ prices = {
     'D': 15
 }
 
-# We store special offers in a dictionary, where the key is the SKU and the value is a tuple containing the number of items in the offer and the price of the offer.
-special_offers = {
-    'A': (3, 130),
-    'B': (2, 45)
+normal_offers = {
+    'A': [ (3, 130), (5, 200) ],
+    'B': [ (2, 45) ],
+}
+
+# Structure: {SKU: (offer_count, (SKU given, number of free items))}
+multi_offers = {
+    'E': (2, ('B', 1))
 }
 
 def checkout(skus):
@@ -31,23 +35,26 @@ def checkout(skus):
     # Count the number of each item in the basket
     counts = {sku: skus.count(sku) for sku in set(skus)}
 
-    # Check for special offers
-    for sku, count in counts.items():
+    for basket_sku, basket_count in counts.items():
+        if basket_sku in multi_offers:
+            offer_count, details = multi_offers[sku]
+            free_sku, free_count = details
+            while basket_count >= offer_count:
+                basket_count -= offer_count
+        
+        if basket_sku in normal_offers:
+            # Sort the offers in descending order
+            sorted_offers = sorted(normal_offers[basket_sku], key=lambda x: x[0], reverse=True)
+            for offer in sorted_offers:
+                offer_count, offer_price = offer
+                while basket_count >= offer_count:
+                    total_price += offer_price
+                    basket_count -= offer_count
 
-        # If the item has a special offer, apply it
-        if sku in special_offers:
-            offer_count, offer_price = special_offers[sku]
-
-            # Apply the offer as many times as possible (i.e. until the count is less than the offer count - the remainder will be charged at the normal price)
-            while count >= offer_count:
-                total_price += offer_price
-                count -= offer_count
-            # Charge the remainder at the normal price
-            total_price += count * prices[sku]
-        else:
-            # If the item does not have a special offer, charge the normal price
-            total_price += count * prices[sku]
-
+        # Add the remaining items to the total price
+        total_price += basket_count * prices[basket_sku]   
+        
     return total_price
     
+
 
