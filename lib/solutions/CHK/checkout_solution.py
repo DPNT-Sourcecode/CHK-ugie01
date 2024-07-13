@@ -15,7 +15,7 @@ prices = {
     'H': 10,
     'I': 35,
     'J': 60,
-    'K': 70,
+    'K': 80,
     'L': 90,
     'M': 15,
     'N': 40,
@@ -93,6 +93,7 @@ def checkout(skus):
         
     return total_price
     
+
 
 
 
