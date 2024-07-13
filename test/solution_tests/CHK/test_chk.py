@@ -1,24 +1,21 @@
-from solutions.SUM import sum_solution
+from solutions.CHK import checkout_solution as checkout
 
 
 class TestSum():
-    def test_sum(self):
-        # Test two integers
-        assert sum_solution.compute(1, 2) == 3
-        # Test first param over 100
-        assert sum_solution.compute(101, 1) == ValueError("Both values must be between 0 and 100")
-        # Test second param over 100
-        assert sum_solution.compute(1, 101) == ValueError("Both values must be between 0 and 100")
-        # Test first param under 0
-        assert sum_solution.compute(-1, 1) == ValueError("Both values must be between 0 and 100")
-        # Test second param under 0
-        assert sum_solution.compute(1, -1) == ValueError("Both values must be between 0 and 100")
-        # Test first param not an integer
-        assert sum_solution.compute("a", 1) == ValueError("Both values must be integers")
-        # Test second param not an integer
-        assert sum_solution.compute(1, "a") == ValueError("Both values must be integers")
-        # Test first param not an integer
-        assert sum_solution.compute(1.1, 1) == ValueError("Both values must be integers")
-        # Test second param not an integer
-        assert sum_solution.compute(1, 1.1) == ValueError("Both values must be integers")
+    def test_checkout(self):
+        # Test the checkout function
+        assert checkout.checkout('A') == 50
+        assert checkout.checkout('AAA') == 130
+        assert checkout.checkout('AAAA') == 180
+        assert checkout.checkout('AAAAA') == 200
+        assert checkout.checkout('AAAAAA') == 250
+        assert checkout.checkout('AAAAAAAA') == 330
+        assert checkout.checkout('B') == 30
+        assert checkout.checkout('BB') == 45
+        assert checkout.checkout('BBB') == 75
+        assert checkout.checkout('EEB') == 80
+        assert checkout.checkout('EEEB') == 120
+        assert checkout.checkout('EEBB') == 110
+        
+
 
