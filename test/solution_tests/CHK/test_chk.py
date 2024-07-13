@@ -16,5 +16,9 @@ class TestSum():
         assert checkout.checkout('EEB') == 80
         assert checkout.checkout('EEEB') == 120
         assert checkout.checkout('EEBB') == 110
+        assert checkout.checkout('FF') == 20
+        assert checkout.checkout('FFF') == 20
+        assert checkout.checkout('FFFF') == 30
         
+
 

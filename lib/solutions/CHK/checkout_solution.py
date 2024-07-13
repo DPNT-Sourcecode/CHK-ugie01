@@ -10,6 +10,7 @@ prices = {
     'C': 20,
     'D': 15,
     'E': 40,
+    'F': 10,
 }
 
 normal_offers = {
@@ -19,7 +20,8 @@ normal_offers = {
 
 # Structure: {SKU: (offer_count, (SKU given, number of free items))}
 multi_offers = {
-    'E': (2, ('B', 1))
+    'E': (2, ('B', 1)),
+    'F': (3, ('F', 1))
 }
 
 def checkout(skus):
@@ -63,4 +65,5 @@ def checkout(skus):
         
     return total_price
     
+
 
