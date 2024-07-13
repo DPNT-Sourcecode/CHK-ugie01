@@ -22,4 +22,3 @@ class TestSum():
         # Test second param not an integer
         assert sum_solution.compute(1, 1.1) == ValueError("Both values must be integers")
 
-

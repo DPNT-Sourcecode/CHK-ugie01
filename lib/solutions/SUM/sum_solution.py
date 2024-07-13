@@ -12,5 +12,3 @@ def compute(x, y):
     # Return the sum of x and y
     else:
         return x + y
-
-
