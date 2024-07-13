@@ -36,13 +36,19 @@ def checkout(skus):
     # Count the number of each item in the basket
     counts = {sku: skus.count(sku) for sku in set(skus)}
 
+    # First apply the multi-buy offers and update the counts
+    for basket_sku in multi_offers:
+        if basket_sku in counts:
+            offer_count, (free_sku, free_count) = multi_offers[basket_sku]
+            if free_sku in counts:
+                # Calculate the number of free items to give
+                free_items = min(counts[basket_sku] // offer_count, counts[free_sku])
+                counts[free_sku] -= free_items
+    
+    # Now calculate the total price with the free items "removed"
+    
     for basket_sku, basket_count in counts.items():
-        if basket_sku in multi_offers:
-            offer_count, details = multi_offers[basket_sku]
-            free_sku, free_count = details
-            while basket_count >= offer_count:
-                basket_count -= offer_count
-        
+
         if basket_sku in normal_offers:
             # Sort the offers in descending order
             sorted_offers = sorted(normal_offers[basket_sku], key=lambda x: x[0], reverse=True)
@@ -57,4 +63,5 @@ def checkout(skus):
         
     return total_price
     
+
 
