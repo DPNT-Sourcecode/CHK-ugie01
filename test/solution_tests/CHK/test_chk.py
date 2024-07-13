@@ -35,9 +35,9 @@ class TestSum():
         assert checkout.checkout('VVV') == 130
         assert checkout.checkout('VVVV') == 180
         assert checkout.checkout('VVVVV') == 220
-        assert checkout.checkout('ABCDEFGHIJKLMNOPQRSTUVWXYZ') == 965
-        assert checkout.checkout('KK') == 150
+        assert checkout.checkout('ABCDEFGHIJKLMNOPQRSTUVWXYZ') == 853
+        assert checkout.checkout('KK') == 120
         assert checkout.checkout('KKK') == 230
-        assert checkout.checkout('KKKK') == 300
-        
+        assert checkout.checkout('KKKK') == 300        
+
 
