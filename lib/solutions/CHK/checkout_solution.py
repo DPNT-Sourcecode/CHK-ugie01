@@ -74,17 +74,15 @@ def checkout(skus):
     # Sort them by price in descending order
     counts = dict(sorted(counts.items(), key=lambda x: prices[x[0]], reverse=True))
 
-    print(counts)
-
     for combo, (combo_count, combo_price) in combos:
         total_bought = sum(counts[sku] for sku in combo if sku in counts)
         while total_bought >= combo_count:
             total_price += combo_price
             
             removed = 0
+            combo = sorted(combo, key=lambda x: prices[x], reverse=True)
             for sku in combo:
                 if sku in counts:
-                    print(f"Removing {sku} from the basket")
                     max_removed = min(counts[sku], combo_count - removed) # Either remove all the items or just the combo count
                     counts[sku] -= max_removed
                     total_bought -= max_removed
@@ -92,7 +90,6 @@ def checkout(skus):
                     if removed == combo_count:
                             break
 
-    print(counts)
 
     # First apply the multi-buy offers and update the counts
     for basket_sku in multi_offers:
@@ -121,6 +118,7 @@ def checkout(skus):
         
     return total_price
     
+
 
 
 
