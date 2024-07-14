@@ -77,7 +77,6 @@ def checkout(skus):
     for combo, (combo_count, combo_price) in combos:
         total_bought = sum(counts[sku] for sku in combo if sku in counts)
         while total_bought >= combo_count:
-            print("Found combo")
             total_price += combo_price
             
             removed = 0
@@ -119,5 +118,6 @@ def checkout(skus):
         
     return total_price
     
+
 
 
