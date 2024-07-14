@@ -71,19 +71,23 @@ def checkout(skus):
     # Count the number of each item in the basket
     counts = {sku: skus.count(sku) for sku in set(skus)}
 
+    # Sort them by price in descending order
+    counts = dict(sorted(counts.items(), key=lambda x: prices[x[0]], reverse=True))
+
     for combo, (combo_count, combo_price) in combos:
         total_bought = sum(counts[sku] for sku in combo if sku in counts)
         while total_bought >= combo_count:
             print("Found combo!")
             total_price += combo_price
-            for sku in combo:
-                if sku in counts:
-                    counts[sku] -= 1
-                    total_bought -= 1
-
-    print(total_price)
-    print(counts)
-    
+            # Remove the items from the counts (but only as many as needed)
+            removed = 0
+            while removed < combo_count:
+                for sku in combo:
+                    if sku in counts:
+                        counts[sku] -= min(counts[sku], combo_count)
+                        total_bought -= min(counts[sku], combo_count)
+                        removed += min(counts[sku], combo_count)
+             
 
     # First apply the multi-buy offers and update the counts
     for basket_sku in multi_offers:
@@ -112,4 +116,5 @@ def checkout(skus):
         
     return total_price
     
+
 
