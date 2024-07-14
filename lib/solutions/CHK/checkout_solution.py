@@ -77,18 +77,21 @@ def checkout(skus):
     for combo, (combo_count, combo_price) in combos:
         total_bought = sum(counts[sku] for sku in combo if sku in counts)
         while total_bought >= combo_count:
+            print("Found combo")
             total_price += combo_price
             
             removed = 0
             for sku in combo:
                 if sku in counts:
-                    max_removed = min(counts[sku], combo_count) # Either remove all the items or just the combo count
+                    max_removed = min(counts[sku], combo_count - removed) # Either remove all the items or just the combo count
                     counts[sku] -= max_removed
                     total_bought -= max_removed
                     removed += max_removed
                     if removed == combo_count:
                             break
-             
+
+    print(counts)
+
     # First apply the multi-buy offers and update the counts
     for basket_sku in multi_offers:
         if basket_sku in counts:
@@ -116,4 +119,5 @@ def checkout(skus):
         
     return total_price
     
+
 
