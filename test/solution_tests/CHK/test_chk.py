@@ -43,8 +43,3 @@ class TestSum():
         assert checkout.checkout('XXXX') == 62
         assert checkout.checkout('STXSTX') == 90
 
-
-
-
-
-
