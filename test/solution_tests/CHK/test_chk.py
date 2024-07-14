@@ -39,6 +39,7 @@ class TestSum():
         assert checkout.checkout('KK') == 120
         assert checkout.checkout('KKK') == 190
         assert checkout.checkout('KKKK') == 240
-        assert checkout.checkout('XXX') == 45       
+        assert checkout.checkout('XXXX') == 62     
+
 
 
