@@ -83,10 +83,10 @@ def checkout(skus):
             removed = 0
             for sku in combo:
                 if sku in counts:
-                    # Remove as many items as possible aligned with the combo
-                    counts[sku] -= 1
-                    total_bought -= 1
-                    removed += 1
+                    max_removed = min(counts[sku], combo_count) # Either remove all the items or just the combo count
+                    counts[sku] -= max_removed
+                    total_bought -= max_removed
+                    removed += max_removed
                     if removed == combo_count:
                             break
              
@@ -119,6 +119,7 @@ def checkout(skus):
         
     return total_price
     
+
 
 
 
