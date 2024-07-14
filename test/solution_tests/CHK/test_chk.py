@@ -4,6 +4,7 @@ from lib.solutions.CHK import checkout_solution as checkout
 class TestSum():
     def test_checkout(self):
         # Test the checkout function
+        assert checkout.checkout('SSSZ') == 65     
         assert checkout.checkout('A') == 50
         assert checkout.checkout('AAA') == 130
         assert checkout.checkout('AAAA') == 180
@@ -42,6 +43,7 @@ class TestSum():
         assert checkout.checkout('XXXX') == 62
         assert checkout.checkout('STXSTX') == 90
         assert checkout.checkout('SSSZ') == 65     
+
 
 
 

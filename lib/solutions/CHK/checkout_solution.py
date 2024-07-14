@@ -74,6 +74,8 @@ def checkout(skus):
     # Sort them by price in descending order
     counts = dict(sorted(counts.items(), key=lambda x: prices[x[0]], reverse=True))
 
+    print(counts)
+
     for combo, (combo_count, combo_price) in combos:
         total_bought = sum(counts[sku] for sku in combo if sku in counts)
         while total_bought >= combo_count:
@@ -82,6 +84,7 @@ def checkout(skus):
             removed = 0
             for sku in combo:
                 if sku in counts:
+                    print(f"Removing {sku} from the basket")
                     max_removed = min(counts[sku], combo_count - removed) # Either remove all the items or just the combo count
                     counts[sku] -= max_removed
                     total_bought -= max_removed
@@ -118,6 +121,7 @@ def checkout(skus):
         
     return total_price
     
+
 
 
 
